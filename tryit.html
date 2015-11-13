@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-IE">
+<head>
+<title>Ennis CoderDojo version of Tryit Editor v2.6 from w3schools</title>
+<meta name="viewport" content="width=device-width">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/trystyle.css">
+
+<!--[if lt IE 8]>
+<style>
+.textareacontainer, .iframecontainer {width:48%;}
+.textarea, .iframe {height:800px;}
+#textareaCode, #iframeResult {height:700px;}
+.menu img {display:none;}
+</style>
+<![endif]-->
+
+<script>
+if (window.addEventListener) {              
+    window.addEventListener("resize", browserResize);
+} else if (window.attachEvent) {                 
+    window.attachEvent("onresize", browserResize);
+}
+var xbeforeResize = window.innerWidth;
+
+function browserResize() {
+    var afterResize = window.innerWidth;
+    if ((xbeforeResize < (970) && afterResize >= (970)) || (xbeforeResize >= (970) && afterResize < (970)) ||
+        (xbeforeResize < (728) && afterResize >= (728)) || (xbeforeResize >= (728) && afterResize < (728)) ||
+        (xbeforeResize < (468) && afterResize >= (468)) ||(xbeforeResize >= (468) && afterResize < (468))) {
+        xbeforeResize = afterResize;
+    }
+}
+</script>
+<script type="text/javascript">
+function submitTryit() {
+  var text = document.getElementById("textareaCode").value;
+  var ifr = document.createElement("iframe");
+  ifr.setAttribute("frameborder", "0");
+  ifr.setAttribute("id", "iframeResult");  
+  document.getElementById("iframewrapper").innerHTML = "";
+  document.getElementById("iframewrapper").appendChild(ifr);
+  var ifrw = (ifr.contentWindow) ? ifr.contentWindow : (ifr.contentDocument.document) ? ifr.contentDocument.document : ifr.contentDocument;
+  ifrw.document.open();
+  ifrw.document.write(text);  
+  ifrw.document.close();
+}
+</script>
+<style>
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="textareacontainer">
+    <div class="textarea">
+      <div style="overflow:auto;">
+        <div class="headerText">Edit This Code:</div>
+        <button class="seeResult" type="button" onclick="submitTryit()">See Result &raquo;</button>
+      </div>
+      <div class="textareawrapper">
+        <textarea autocomplete="off" class="code_input" id="textareaCode" wrap="logical" spellcheck="false">
+<!DOCTYPE html>
+<html>
+
+<body>
+The content of the body element is displayed in your browser.
+</body>
+
+</html>
+</textarea>
+
+          <form autocomplete="off" style="margin:0px;display:none;">
+            <input type="hidden" name="code" id="code" />
+            <input type="hidden" id="bt" name="bt" />
+          </form>
+       </div>
+    </div>
+  </div>
+  <div class="iframecontainer">
+    <div class="iframe">
+      <div style="overflow:auto;">
+        <div class="headerText">Result:</div>
+      </div>
+      <div id="iframewrapper" class="iframewrapper">
+        
+      </div>
+    </div>
+  </div>
+</div>
+<script>submitTryit()</script>
+</body>
+</html>
