@@ -8,19 +8,12 @@ body {
     margin:0px;
     font-size:100%;
 }
-#ads {
-    background-color: #ffffff;
-    height: 104px;
-    width:100%;
-    margin-top:0px;
-    min-width:903px;
-}
 .container {
     background-color:#f1f1f1;
     width:100%;
     overflow:auto;
     position:absolute;
-    top:100px;
+    top:0px;
     bottom:0;
     height:auto;
     min-height:250px;
