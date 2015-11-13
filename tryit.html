@@ -45,7 +45,38 @@ function submitTryit() {
   ifrw.document.write(text);  
   ifrw.document.close();
 }
+
 </script>
+<script type="text/javascript">
+function saveTryit()
+{
+  var textToWrite = document.getElementById("textareaCode").value;
+  var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
+  var fileNameToSaveAs = "index.html";
+
+  var downloadLink = document.createElement("a");
+  downloadLink.download = fileNameToSaveAs;
+  downloadLink.innerHTML = "Download File";
+  if (window.webkitURL != null)
+  {
+    // Chrome allows the link to be clicked
+    // without actually adding it to the DOM.
+    downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+  }
+  else
+  {
+    // Firefox requires the link to be added to the DOM
+    // before it can be clicked.
+    downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+  }
+
+  downloadLink.click();
+}
+</script>
+
 <style>
 
 </style>
@@ -58,6 +89,7 @@ function submitTryit() {
       <div style="overflow:auto;">
         <div class="headerText">Edit This Code:</div>
         <button class="seeResult" type="button" onclick="submitTryit()">See Result &raquo;</button>
+        <button class="seeResult" type="button" onclick="saveTryit()">Save</button>
       </div>
       <div class="textareawrapper">
         <textarea autocomplete="off" class="code_input" id="textareaCode" wrap="logical" spellcheck="false">
