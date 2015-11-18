@@ -56,7 +56,7 @@ function show_header($dirlinks='') {
 	
 	echo "<link rel=\"stylesheet\" href=\""._EXT_URL."/style/style.css\" type=\"text/css\" />\n";
 	echo "<div id=\"ext_header\">\n";
-	echo "<table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"5\">\n";
+	echo "<table border=\"0\" width=\"100%\" cellspacing=\"10\" cellpadding=\"5\">\n";
 	$mode = extGetParam( $_SESSION, 'file_mode', $GLOBALS['ext_conf']['authentication_method_default'] );
 	$logoutlink = ' <a href="'.$GLOBALS['script_name'].'?option=com_extplorer&amp;action=logout" title="'.$GLOBALS['messages']['logoutlink'].'">['.$GLOBALS['messages']['logoutlink'].']</a>';
 	$alternate_modes = array();
@@ -76,19 +76,17 @@ function show_header($dirlinks='') {
 	} else {
 		echo ext_selectList('language_selector', $GLOBALS['language'], get_languages(), 1, '', 'onchange="document.location.href=\''.$GLOBALS['script_name'].'?lang=\' + this.options[this.selectedIndex].value;"');
 	}
-	// Logo
-	echo "</td><td style=\"color:black;\" width=\"10%\">";
-	//echo "<div style=\"margin-left:10px;float:right;\" width=\"305\" >";
-	echo "<a href=\"".$GLOBALS['ext_home']."\" target=\"_blank\" title=\"eXtplorer Project\">
-		<img src=\""._EXT_URL."/images/eXtplorer_logo.png\" alt=\"eXtplorer Logo\" border=\"0\" /></a>
-		</td>";
-	//echo "</div>";
-	echo "<td style=\"padding-left: 15px; color:black;\" id=\"bookmark_container\" width=\"35%\"></td>\n";
-	echo "<td width=\"25%\" style=\"padding-left: 15px; color:black;\">"
-		.sprintf( $GLOBALS['messages']['switch_file_mode'], $mode . $logoutlink, implode(', ', $alternate_modes ) ). "
-	</td>\n";
-
-	echo '</tr></table>';
+	echo "</td>";
+    echo "<td style=\"padding-left: 15px; color:black;\">";
+	    $preurlPieces = explode("/",_EXT_URL);
+	    array_pop($preurlPieces);
+	    $preurl=implode("/",$preurlPieces);
+		$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https:' : 'http:';
+		$dojowebsite=$protocol.$preurl."/ninja/mieslep";
+	    echo "Your public webpage is at <a href=\"".$dojowebsite."\" target=\"_blank\">".$dojowebsite."</a>";
+	echo "</td>\n";
+	echo '</tr>';
+	echo '</table>';
 	echo '</div>';
 }
 //------------------------------------------------------------------------------
