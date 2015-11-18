@@ -8,16 +8,21 @@ if( !defined( '_JEXEC' ) && !defined( '_VALID_MOS' ) ) die( 'Restricted access' 
 $GLOBALS['use_gzip'] = 1;
 
 // Name of the authentication module which is used by default
-$GLOBALS['ext_conf']['authentication_method_default'] = 'extplorer';
+$GLOBALS['ext_conf']['authentication_method_default'] = 'dojocookie';
 // authentication methods can be found in /include/authentication
-$GLOBALS['ext_conf']['authentication_methods_allowed'] = array('extplorer', 'ftp');
+$GLOBALS['ext_conf']['authentication_methods_allowed'] = array('dojocookie');
 // the next setting controls which remote servers users are allowed to connect to
 $GLOBALS['ext_conf']['remote_hosts_allowed'] = array('localhost', 
 													//'yourserver.com', 
 													);
 
+parse_str($_COOKIE['coderdojomember'], $memberCookieArray);
+$GLOBALS["user_root_dir"] = "../ninja";
+$_SESSION['credentials_dojocookie']['username'] = $memberCookieArray['username'];
+$_SESSION['credentials_dojocookie']['password'] = NULL;
+
 $GLOBALS['allow_webdav'] = 0;
-$GLOBALS['webdav_authentication_method'] = 'extplorer'; // use one of the  authentication methods in /include/authentication
+$GLOBALS['webdav_authentication_method'] = 'dojocookie'; // use one of the  authentication methods in /include/authentication
 
 // The following database settings are only necessary if you want to use WebDAV in Standalone Mode.
 // Joomla users don't need to enter their DB settings here, 
