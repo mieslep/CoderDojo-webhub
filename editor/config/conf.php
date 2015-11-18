@@ -21,6 +21,12 @@ $GLOBALS["user_root_dir"] = "../ninja";
 $_SESSION['credentials_dojocookie']['username'] = $memberCookieArray['username'];
 $_SESSION['credentials_dojocookie']['password'] = NULL;
 
+$preurlPieces = explode("/",_EXT_URL);
+array_pop($preurlPieces);
+$preurl=implode("/",$preurlPieces);
+$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https:' : 'http:';
+$GLOBALS["ninja_url"] = $protocol.$preurl."/ninja/";
+
 $GLOBALS['allow_webdav'] = 0;
 $GLOBALS['webdav_authentication_method'] = 'dojocookie'; // use one of the  authentication methods in /include/authentication
 

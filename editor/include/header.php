@@ -78,11 +78,7 @@ function show_header($dirlinks='') {
 	}
 	echo "</td>";
     echo "<td style=\"padding-left: 15px; color:black;\">";
-	    $preurlPieces = explode("/",_EXT_URL);
-	    array_pop($preurlPieces);
-	    $preurl=implode("/",$preurlPieces);
-		$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https:' : 'http:';
-		$dojowebsite=$protocol.$preurl."/ninja/".$_SESSION['credentials_dojocookie']['username'];
+		$dojowebsite=$GLOBALS["ninja_url"].$_SESSION['credentials_dojocookie']['username'];
 	    echo "Your public webpage is at <a href=\"".$dojowebsite."\" target=\"_blank\">".$dojowebsite."</a>";
 	echo "</td>\n";
 	echo '</tr>';
