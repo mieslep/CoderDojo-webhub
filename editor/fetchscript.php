@@ -224,7 +224,7 @@ for( $i = 0; $i < $countFiles; $i++ ) {
 			header( 'Content-Type: '.$mime_type.';');
 			$css = implode( '', file( $file ));
 
-			$str_css =	preg_replace("/url\((.+?)\)/ie","cssUrl('\\1', '$subdir')", $css);
+			$str_css =	preg_replace_callback("/url\((.+?)\)/ie","cssUrl('\\1', '$subdir')", $css);
 			echo $str_css;
 
 			break;
