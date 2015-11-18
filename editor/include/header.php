@@ -82,7 +82,7 @@ function show_header($dirlinks='') {
 	    array_pop($preurlPieces);
 	    $preurl=implode("/",$preurlPieces);
 		$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https:' : 'http:';
-		$dojowebsite=$protocol.$preurl."/ninja/mieslep";
+		$dojowebsite=$protocol.$preurl."/ninja/".$_SESSION['credentials_dojocookie']['username'];
 	    echo "Your public webpage is at <a href=\"".$dojowebsite."\" target=\"_blank\">".$dojowebsite."</a>";
 	echo "</td>\n";
 	echo '</tr>';
