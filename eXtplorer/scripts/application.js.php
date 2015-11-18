@@ -432,17 +432,19 @@ function ext_init(){
            dataIndex: 'modified',
            width: 150,
 		   sortable: true
-        },{
-           header: "<?php echo ext_Lang::msg('permheader', true ) ?>",
-           dataIndex: 'perms',
-           width: 100,
-		   sortable: true
-        },{
-           header: "<?php echo ext_Lang::msg('miscowner', true ) ?>",
-           dataIndex: 'owner',
-           width: 100,
-           sortable: false
-        }, 
+        },
+    // Dojo: removing ability to see perms / owner
+     //    {
+     //       header: "<?php echo ext_Lang::msg('permheader', true ) ?>",
+     //       dataIndex: 'perms',
+     //       width: 100,
+		   // sortable: true
+     //    },{
+     //       header: "<?php echo ext_Lang::msg('miscowner', true ) ?>",
+     //       dataIndex: 'owner',
+     //       width: 100,
+     //       sortable: false
+     //    }, 
         { dataIndex: 'is_deletable', header: "is_deletable", hidden: true, hideable: false },
         {dataIndex: 'is_file', hidden: true, hideable: false },
         {dataIndex: 'is_archive', hidden: true, hideable: false },

@@ -43,7 +43,6 @@ class ext_Mkitem extends ext_Action {
 		if( extGetParam($_POST,'confirm') == 'true') {
 			$mkname=$GLOBALS['__POST']["mkname"];
 			$mktype=$GLOBALS['__POST']["mktype"];
-			$symlink_target = $GLOBALS['__POST']['symlink_target'];
 
 			$mkname=basename(stripslashes($mkname));
 			if($mkname=="") ext_Result::sendResult( 'mkitem', false,  $GLOBALS["error_msg"]["miscnoname"] );
@@ -60,16 +59,7 @@ class ext_Mkitem extends ext_Action {
 			} elseif( $mktype == 'file') {
 				$ok=@$GLOBALS['ext_File']->mkfile($new);
 				$err=$GLOBALS["error_msg"]["createfile"];
-			} elseif( $mktype == 'symlink' ) {
-				if( empty( $symlink_target )) {
-					ext_Result::sendResult( 'mkitem', false, 'Please provide a valid <strong>target</strong> for the symbolic link.');
-				}
-				if( !file_exists($symlink_target) || !is_readable($symlink_target)) {
-					ext_Result::sendResult( 'mkitem', false, 'The file you wanted to make a symbolic link to does not exist or is not accessible by PHP.');
-				}
-				$ok = symlink( $symlink_target, $new );
-				$err = 'The symbolic link could not be created.';
-			}
+			} 
 
 			if($ok==false || PEAR::isError( $ok )) {
 				if( PEAR::isError( $ok ) ) $err.= $ok->getMessage();
@@ -88,39 +78,29 @@ class ext_Mkitem extends ext_Action {
 		"dialogtitle": "Create New File/Directory",
 		"frame": true,
 		"items": [{
-			"xtype": "textfield",
-			"fieldLabel": "<?php echo ext_Lang::msg( "nameheader", true ) ?>",
-			"name": "mkname",
-			"width":175,
-			"allowBlank":false
+				"xtype": "textfield",
+				"fieldLabel": "<?php echo ext_Lang::msg( "nameheader", true ) ?>",
+				"name": "mkname",
+				"width":175,
+				"allowBlank":false
 			},{
-			"xtype": "combo",
-			"fieldLabel": "Type",
-			"store": [["file", "<?php echo ext_Lang::mime( 'file', true ) ?>"],
-						["dir", "<?php echo ext_Lang::mime( 'dir', true ) ?>"]
-						<?php
-						if( !ext_isFTPMode() && !$GLOBALS['isWindows']) { ?>
-						,["symlink", "<?php echo ext_Lang::mime( 'symlink', true ) ?>"]
-						<?php
-						} ?>
-					],
-			displayField:"type",
-			valueField: "mktype",
-			value: "file",
-			hiddenName: "mktype",
-			disableKeyFilter: true,
-			editable: false,
-			triggerAction: "all",
-			mode: "local",
-			allowBlank: false,
-			selectOnFocus:true
-		},{
-			"xtype": "textfield",
-			"fieldLabel": "<?php echo ext_Lang::msg( 'symlink_target', true ) ?>",
-			"name": "symlink_target",
-			"width":175,
-			"allowBlank":true
-		}],
+				"xtype": "combo",
+				"fieldLabel": "Type",
+				"store": [["file", "<?php echo ext_Lang::mime( 'file', true ) ?>"],
+							["dir", "<?php echo ext_Lang::mime( 'dir', true ) ?>"]
+						],
+				displayField:"type",
+				valueField: "mktype",
+				value: "file",
+				hiddenName: "mktype",
+				disableKeyFilter: true,
+				editable: false,
+				triggerAction: "all",
+				mode: "local",
+				allowBlank: false,
+				selectOnFocus:true
+			}
+		],
 		"buttons": [{
 			"text": "<?php echo ext_Lang::msg( 'btncreate', true ) ?>", 
 			"handler": function() {
