@@ -16,10 +16,12 @@ $GLOBALS['ext_conf']['remote_hosts_allowed'] = array('localhost',
 													//'yourserver.com', 
 													);
 
-parse_str($_COOKIE['coderdojomember'], $memberCookieArray);
-$GLOBALS["user_root_dir"] = "../ninja";
-$_SESSION['credentials_dojocookie']['username'] = $memberCookieArray['username'];
-$_SESSION['credentials_dojocookie']['password'] = NULL;
+if(isset($_COOKIE['coderdojomember'])) {
+	parse_str($_COOKIE['coderdojomember'], $memberCookieArray);
+	$GLOBALS["user_root_dir"] = "../ninja";
+	$_SESSION['credentials_dojocookie']['username'] = $memberCookieArray['username'];
+	$_SESSION['credentials_dojocookie']['password'] = NULL;
+}
 
 $preurlPieces = explode("/",_EXT_URL);
 array_pop($preurlPieces);
