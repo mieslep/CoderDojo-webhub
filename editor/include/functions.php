@@ -1423,7 +1423,7 @@ if (!function_exists('html_entity_decode')) {
 function logout() {
 	session_destroy();
 	session_write_close();
-	header("Location: ".$GLOBALS["script_name"]);
+	header("Location: http://member.coderdojoennis.com/Home/LogOut");
 }
 //------------------------------------------------------------------------------
 /**

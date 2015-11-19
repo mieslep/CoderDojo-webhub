@@ -1,6 +1,27 @@
 <?php
 // ensure this file is being included by a parent file
 if( !defined( '_JEXEC' ) && !defined( '_VALID_MOS' ) ) die( 'Restricted access' );
+$member_cookie_name = "coderdojomember";
+if(!isset($_COOKIE[$member_cookie_name])) {
+	header("Location: http://member.coderdojoennis.com/?returnurl=http" . (isset($_SERVER['HTTPS']) ? 's' : '') . "://" . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}");
+	die();
+}
+else {
+    parse_str($_COOKIE[$member_cookie_name], $memberCookieArray);
+    $username = $memberCookieArray['username'];
+
+    $ninjaDir = $ninjaBaseDir.'/'.$username;
+
+	if (!file_exists($ninjaDir)) {
+	    mkdir($ninjaDir, 0755, true);
+	}
+
+	if (!file_exists($ninjaDir.'/index.html')) {
+	    exec('cp index.html.template '.$ninjaDir.'/index.html');
+	}
+
+}
+
 /**
  * @version $Id: login.php 231 2013-09-04 18:12:47Z soeren $
  * @package eXtplorer
