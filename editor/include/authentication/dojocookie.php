@@ -14,7 +14,7 @@ class ext_dojocookie_authentication {
 			// $_SESSION['credentials_dojocookie']['username'] = $memberCookieArray['username'];
 			// $_SESSION['credentials_dojocookie']['password'] = NULL;
 			$_SESSION['file_mode'] = 'dojocookie';
-			$GLOBALS["home_dir"]	= $GLOBALS["user_root_dir"] . "/" . $_SESSION['credentials_dojocookie']['username'];
+			$GLOBALS["home_dir"]	= $GLOBALS["ninjaDir"];
 			$GLOBALS["home_url"]	= "http://localhost";
 			$GLOBALS["show_hidden"]	= 1;
 			$GLOBALS["no_access"]	= NULL;

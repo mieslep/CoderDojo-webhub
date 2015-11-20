@@ -18,8 +18,17 @@ $GLOBALS['ext_conf']['remote_hosts_allowed'] = array('localhost',
 
 if(isset($_COOKIE['coderdojomember'])) {
 	parse_str($_COOKIE['coderdojomember'], $memberCookieArray);
-	$GLOBALS["user_root_dir"] = "../ninja";
-	$_SESSION['credentials_dojocookie']['username'] = $memberCookieArray['username'];
+
+ 	$username=$memberCookieArray['username'];
+ 	if (preg_match('/[\.\/\$\`\()]/', $username)) {
+ 		error_log("username ".$username." contains bad chars!");
+ 		logout();
+ 		die();
+ 	}
+
+	$GLOBALS["user_root_dir"] = dirname(__FILE__)."/../../ninja";
+    $GLOBALS["ninjaDir"] = $GLOBALS["user_root_dir"].'/'.$username;
+	$_SESSION['credentials_dojocookie']['username'] = $username;
 	$_SESSION['credentials_dojocookie']['password'] = NULL;
 }
 
@@ -28,6 +37,20 @@ array_pop($preurlPieces);
 $preurl=implode("/",$preurlPieces);
 $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https:' : 'http:';
 $GLOBALS["ninja_url"] = $protocol.$preurl."/ninja/";
+
+if (!file_exists($GLOBALS["ninjaDir"])) {
+    $res = mkdir($GLOBALS["ninjaDir"], 0755, true);
+    if (!$res) {
+		error_log("error in mkdir of ".$GLOBALS["ninjaDir"]);	
+		logout();
+		die();
+    }
+}
+
+if (!file_exists($GLOBALS["ninjaDir"].'/index.html')) {
+    exec('cp '.$GLOBALS["user_root_dir"].'/../index.html.template '.$GLOBALS["ninjaDir"].'/index.html');
+}
+
 
 $GLOBALS['allow_webdav'] = 0;
 $GLOBALS['webdav_authentication_method'] = 'dojocookie'; // use one of the  authentication methods in /include/authentication
