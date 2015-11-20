@@ -20,7 +20,7 @@ if(isset($_COOKIE['coderdojomember'])) {
 	parse_str($_COOKIE['coderdojomember'], $memberCookieArray);
 
  	$username=$memberCookieArray['username'];
- 	if (preg_match('/[\.\/\$\`\()]/', $username)) {
+ 	if (preg_match('/[\.\/\$\`\()\;\&]/', $username)) {
  		error_log("username ".$username." contains bad chars!");
  		logout();
  		die();
