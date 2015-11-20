@@ -81,6 +81,9 @@ function show_header($dirlinks='') {
 		$dojowebsite=$GLOBALS["ninja_url"].$_SESSION['credentials_dojocookie']['username'];
 	    echo "Your public webpage is at <a href=\"".$dojowebsite."\" target=\"_blank\">".$dojowebsite."</a>";
 	echo "</td>\n";
+	echo "<td>";
+	echo '<a href="'.$GLOBALS['script_name'].'?option=com_extplorer&amp;action=logout">Logout</a>';
+	echo "</td>\n";	
 	echo '</tr>';
 	echo '</table>';
 	echo '</div>';
