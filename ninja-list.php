@@ -4,7 +4,7 @@ $dir          = "ninja";
 $return_array = array();
 
 $preurlPieces = explode("/",$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-array_pop($preurlPieces);
+
 array_pop($preurlPieces);
 $preurl=implode("/",$preurlPieces);
 $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https:' : 'http:';
